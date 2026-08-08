@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import BoxLoader from "@/components/ui/box-loader";
 import { SpinningText } from "@/components/ui/spinning-text";
+import { Wave } from "@/components/ui/wave";
+import { Hero } from "@/components/Hero";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import ScrollFAQAccordion from "@/components/ui/scroll-faqaccordion";
 import {
@@ -584,27 +586,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
       </div>
 
       <main id="main-content" ref={mainRef}>
-        <section
-          className="scene scene--hero-empty"
-          id="top"
-          data-scene="00"
-          aria-label="Hero Section"
-        >
-          <div className="scene__stage hero-empty__stage">
-            <div className="hero-empty__content">
-              <h1 className="hero-empty__title">AM</h1>
-              <SpinningText
-                radius={6}
-                fontSize={1}
-                duration={16}
-                color="#df5f3e"
-                className="w-[clamp(10rem,20vw,22rem)] h-[clamp(10rem,20vw,22rem)] shrink-0"
-              >
-                {`CAREER OS • INTELLIGENT JOB ASSISTANT • `}
-              </SpinningText>
-            </div>
-          </div>
-        </section>
+        <Hero />
 
         <section
           className="scene scene--hero"
@@ -632,21 +614,52 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
             </h1>
 
             <div className="hero__resume-sheet" aria-hidden="true">
-              <div className="resume-sheet__head">
-                <span>CLIENT BRIEF</span>
-                <span>01 / SOURCE</span>
+              <div className="resume-sheet__top-bar">
+                <span className="resume-sheet__status-badge">
+                  <span className="resume-sheet__dot" />
+                  CLIENT BRIEF
+                </span>
+                <span className="resume-sheet__source">01 / SOURCE</span>
               </div>
-              <div className="resume-sheet__role">Digital Product / Brand</div>
-              <span className="resume-sheet__rule resume-sheet__rule--wide" />
-              <div className="resume-sheet__label">DELIVERABLES</div>
-              <div className="resume-sheet__item">Built a scalable design system</div>
-              <div className="resume-sheet__item">Shipped 3 production products</div>
-              <div className="resume-sheet__item">Led 2 full launch cycles</div>
-              <span className="resume-sheet__rule resume-sheet__rule--wide" />
-              <div className="resume-sheet__label">STACK / CAPABILITIES</div>
-              <div className="resume-sheet__chips">
-                <span>Design</span><span>React</span><span>Brand</span>
-                <span>Motion</span><span>Web</span>
+
+              <div className="resume-sheet__role-wrapper">
+                <h3 className="resume-sheet__role">Digital Product / Brand</h3>
+                <span className="resume-sheet__subtext">SPECIFICATION // SCOPED</span>
+              </div>
+
+              <div className="resume-sheet__divider" />
+
+              <div className="resume-sheet__section">
+                <div className="resume-sheet__label">DELIVERABLES</div>
+                <ul className="resume-sheet__list">
+                  <li className="resume-sheet__item">
+                    <span className="resume-sheet__bullet">✦</span> Built scalable design system
+                  </li>
+                  <li className="resume-sheet__item">
+                    <span className="resume-sheet__bullet">✦</span> Shipped 3 production products
+                  </li>
+                  <li className="resume-sheet__item">
+                    <span className="resume-sheet__bullet">✦</span> Led 2 full launch cycles
+                  </li>
+                </ul>
+              </div>
+
+              <div className="resume-sheet__divider" />
+
+              <div className="resume-sheet__section">
+                <div className="resume-sheet__label">STACK / CAPABILITIES</div>
+                <div className="resume-sheet__chips">
+                  <span>DESIGN</span>
+                  <span>REACT</span>
+                  <span>BRAND</span>
+                  <span>MOTION</span>
+                  <span>WEB</span>
+                </div>
+              </div>
+
+              <div className="resume-sheet__footer-stamp">
+                <span>AM STUDIO // VERIFIED</span>
+                <span>2026</span>
               </div>
             </div>
 
