@@ -55,7 +55,7 @@ export default function GetStartedPage() {
       }}
     >
       <a href="/" style={{ opacity: 0.6, fontSize: 13 }}>
-        ← Back to AM Agency
+        ← Back to AM Studio
       </a>
       <h1
         style={{
@@ -68,7 +68,7 @@ export default function GetStartedPage() {
         Start with your resume
       </h1>
       <p style={{ opacity: 0.65, marginBottom: "2.5rem", maxWidth: 560 }}>
-        Paste your resume and a job description. AM Agency tailors the framing to
+        Paste your resume and a job description. AM Studio tailors the framing to
         the role without inventing experience, and finds live matching jobs.
       </p>
 

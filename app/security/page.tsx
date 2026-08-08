@@ -1,8 +1,8 @@
 import { LegalLayout } from "@/components/LegalLayout";
 
 export const metadata = {
-  title: "Security & NDAs | AM Agency",
-  description: "Security architecture, mutual NDA guarantees, and asset protection at AM Agency.",
+  title: "Security & NDAs | AM Studio",
+  description: "Security architecture, mutual NDA guarantees, and asset protection at AM Studio.",
 };
 
 export default function SecurityPage() {
@@ -15,7 +15,7 @@ export default function SecurityPage() {
       <section className="legal-section-card">
         <h2 className="legal-section-heading">1. Mutual Non-Disclosure Obligations</h2>
         <p className="legal-section-body">
-          AM Agency executes Mutual Non-Disclosure Agreements (MNDAs) prior to reviewing proprietary client briefs, codebase repositories, or strategic roadmap assets. All client disclosures remain strictly confidential.
+          AM Studio executes Mutual Non-Disclosure Agreements (MNDAs) prior to reviewing proprietary client briefs, codebase repositories, or strategic roadmap assets. All client disclosures remain strictly confidential.
         </p>
       </section>
 
@@ -32,7 +32,7 @@ export default function SecurityPage() {
           To request an executed NDA or report a security concern, contact our dedicated security team:
         </p>
         <div className="legal-contact-box">
-          <p><strong>AM Agency Security Operations</strong></p>
+          <p><strong>AM Studio Security Operations</strong></p>
           <p>Kompally, Hyderabad, Telangana, India</p>
           <p>Phone: +91 9542710588</p>
           <p>Email: <a href="mailto:infoam@gmail.com">infoam@gmail.com</a></p>

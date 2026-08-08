@@ -516,13 +516,15 @@
   .hero-empty__content {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(2rem, 5vw, 7rem);
   }
 
   .hero-empty__title {
     font-family: "Arial Black", "Helvetica Neue", sans-serif;
-    font-size: clamp(6rem, 28vw, 32rem);
+    font-size: clamp(6rem, 22vw, 24rem);
     font-weight: 900;
     letter-spacing: -0.08em;
     line-height: 0.85;
@@ -1757,6 +1759,12 @@
 
     .scene--final {
       height: 130vh;
+    }
+
+    .scene--faq {
+      height: 140vh;
+      background: #000000;
+      color: #f2efe6;
     }
   }
 

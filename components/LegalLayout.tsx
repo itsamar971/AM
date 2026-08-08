@@ -18,7 +18,7 @@ export function LegalLayout({
     <div className="legal-page">
       <header className="legal-header">
         <div className="legal-header__inner">
-          <Link href="/" className="legal-header__logo" aria-label="AM Agency Home">
+          <Link href="/" className="legal-header__logo" aria-label="AM Studio Home">
             <span>AM</span>
             <span className="legal-header__logo-sub">AGENCY</span>
           </Link>
@@ -43,7 +43,7 @@ export function LegalLayout({
       <footer className="site-footer-full" id="contact" aria-label="Site Footer">
         <div className="footer-full__inner">
           <div className="footer-full__brand-col">
-            <Link className="footer-full__logo" href="/" aria-label="AM Agency, back to home">
+            <Link className="footer-full__logo" href="/" aria-label="AM Studio, back to home">
               <span>AM</span>
               <span className="footer-full__logo-sub">AGENCY</span>
             </Link>
@@ -59,7 +59,7 @@ export function LegalLayout({
           <div className="footer-full__col">
             <h3 className="footer-full__heading">HEADQUARTERS & CONTACT</h3>
             <address className="footer-full__address">
-              <p><strong>AM Agency HQ</strong></p>
+              <p><strong>AM Studio HQ</strong></p>
               <p>Kompally, Hyderabad</p>
               <p>Telangana, India</p>
             </address>
@@ -95,7 +95,7 @@ export function LegalLayout({
 
         <div className="footer-full__bottom">
           <div className="footer-full__legal">
-            <p>© 2026 AM Agency Inc. All rights reserved.</p>
+            <p>© 2026 AM Studio Inc. All rights reserved.</p>
             <p className="footer-full__legal-sub">
               Registered Trademark. All agency artifacts, design systems, and code templates are protected under international copyright law.
             </p>

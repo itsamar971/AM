@@ -1,21 +1,21 @@
 import { LegalLayout } from "@/components/LegalLayout";
 
 export const metadata = {
-  title: "Privacy Policy | AM Agency",
-  description: "Privacy Policy for AM Agency - How we collect, use, and protect your information.",
+  title: "Privacy Policy | AM Studio",
+  description: "Privacy Policy for AM Studio - How we collect, use, and protect your information.",
 };
 
 export default function PrivacyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      subtitle="How AM Agency collects, processes, and safeguards client data and platform information."
+      subtitle="How AM Studio collects, processes, and safeguards client data and platform information."
       updatedDate="EFFECTIVE AUGUST 2026"
     >
       <section className="legal-section-card">
         <h2 className="legal-section-heading">1. Information We Collect</h2>
         <p className="legal-section-body">
-          AM Agency (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) collects information necessary to deliver high-quality software engineering, branding, and career automation services. This includes personal contact details, resume artifacts, portfolio metadata, and communications initiated through our website or client portal.
+          AM Studio (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) collects information necessary to deliver high-quality software engineering, branding, and career automation services. This includes personal contact details, resume artifacts, portfolio metadata, and communications initiated through our website or client portal.
         </p>
       </section>
 
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
           For privacy inquiries, data deletion requests, or compliance questions, please contact our Data Protection Officer:
         </p>
         <div className="legal-contact-box">
-          <p><strong>AM Agency Legal & Compliance</strong></p>
+          <p><strong>AM Studio Legal & Compliance</strong></p>
           <p>Kompally, Hyderabad, Telangana, India</p>
           <p>Phone: +91 9542710588</p>
           <p>Email: <a href="mailto:infoam@gmail.com">infoam@gmail.com</a></p>

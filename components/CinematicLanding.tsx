@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import BoxLoader from "@/components/ui/box-loader";
+import { SpinningText } from "@/components/ui/spinning-text";
+import { CinematicFooter } from "@/components/ui/motion-footer";
+import ScrollFAQAccordion from "@/components/ui/scroll-faqaccordion";
 import {
   boundaryChecks,
   matchRoutes,
@@ -458,6 +461,14 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                   { yPercent: 14 },
                   0,
                 );
+
+              const faqTimeline = makePinnedTimeline(".scene--faq", 0.72);
+              faqTimeline?.fromTo(
+                ".faq-box-item",
+                { x: -120, autoAlpha: 0 },
+                { x: 0, autoAlpha: 1, stagger: 0.12 },
+                0,
+              );
             }
 
             const refreshFrame = requestAnimationFrame(() => {
@@ -524,7 +535,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
       </div>
 
       <header className="site-nav">
-        <a className="wordmark" href="#top" aria-label="AM Agency, back to top">
+        <a className="wordmark" href="#top" aria-label="AM Studio, back to top">
           <span>AM</span>
           <span className="wordmark__cv"></span>
         </a>
@@ -564,12 +575,12 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
         <span className="story-progress__track">
           <span ref={progressRef} className="story-progress__fill" />
         </span>
-        <span className="story-progress__label">06</span>
+        <span className="story-progress__label">07</span>
       </div>
 
       <div className="scene-indicator" aria-hidden="true">
         <span>{activeScene}</span>
-        <span> / 06</span>
+        <span> / 07</span>
       </div>
 
       <main id="main-content" ref={mainRef}>
@@ -582,6 +593,15 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           <div className="scene__stage hero-empty__stage">
             <div className="hero-empty__content">
               <h1 className="hero-empty__title">AM</h1>
+              <SpinningText
+                radius={6}
+                fontSize={1}
+                duration={16}
+                color="#df5f3e"
+                className="w-[clamp(10rem,20vw,22rem)] h-[clamp(10rem,20vw,22rem)] shrink-0"
+              >
+                {`CAREER OS • INTELLIGENT JOB ASSISTANT • `}
+              </SpinningText>
             </div>
           </div>
         </section>
@@ -595,7 +615,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           <div className="scene__stage hero__stage">
             <div className="scene__coordinate scene__coordinate--top">
               <span>PUBLIC RELEASE / 01</span>
-              <span>AM AGENCY / GLOBAL</span>
+              <span>AM STUDIO / GLOBAL</span>
             </div>
 
             <div className="hero__intro">
@@ -842,6 +862,8 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           </div>
         </section>
 
+
+
         <section
           className="scene scene--move"
           id="move"
@@ -940,10 +962,24 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           </div>
         </section>
 
+        <section
+          className="scene scene--faq"
+          id="faq"
+          data-scene="07"
+          aria-label="Frequently Asked Questions"
+          style={{ background: "#000000", color: "#f2efe6" }}
+        >
+          <div className="scene__stage faq__stage flex items-center justify-center min-h-screen py-12 px-6 md:px-12">
+            <ScrollFAQAccordion />
+          </div>
+        </section>
+
+        <CinematicFooter />
+
         <footer className="site-footer-full" id="contact" aria-label="Site Footer">
           <div className="footer-full__inner">
             <div className="footer-full__brand-col">
-              <a className="footer-full__logo" href="#top" aria-label="AM Agency, back to top">
+              <a className="footer-full__logo" href="#top" aria-label="AM Studio, back to top">
                 <span>AM</span>
                 <span className="footer-full__logo-sub">AGENCY</span>
               </a>
@@ -959,7 +995,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
             <div className="footer-full__col">
               <h3 className="footer-full__heading">HEADQUARTERS & CONTACT</h3>
               <address className="footer-full__address">
-                <p><strong>AM Agency HQ</strong></p>
+                <p><strong>AM Studio HQ</strong></p>
                 <p>Kompally, Hyderabad</p>
                 <p>Telangana, India</p>
               </address>
@@ -995,7 +1031,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
 
           <div className="footer-full__bottom">
             <div className="footer-full__legal">
-              <p>© 2026 AM Agency Inc. All rights reserved.</p>
+              <p>© 2026 AM Studio Inc. All rights reserved.</p>
               <p className="footer-full__legal-sub">
                 Registered Trademark. All agency artifacts, design systems, and code templates are protected under international copyright law.
               </p>

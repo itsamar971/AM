@@ -7,10 +7,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "AM",
   description:
-    "AM Agency transforms briefs into high-impact digital products, brands, and autonomous systems.",
+    "AM Studio transforms briefs into high-impact digital products, brands, and autonomous systems.",
   applicationName: "AM",
   icons: { icon: "/favicon.svg" },
-  authors: [{ name: "AM Agency" }],
+  authors: [{ name: "AM Studio" }],
   keywords: [
     "agency",
     "branding",

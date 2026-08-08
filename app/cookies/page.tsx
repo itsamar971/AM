@@ -1,8 +1,8 @@
 import { LegalLayout } from "@/components/LegalLayout";
 
 export const metadata = {
-  title: "Cookie Settings & Policy | AM Agency",
-  description: "Cookie policy and session preferences for AM Agency platform.",
+  title: "Cookie Settings & Policy | AM Studio",
+  description: "Cookie policy and session preferences for AM Studio platform.",
 };
 
 export default function CookiesPage() {
