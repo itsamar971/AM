@@ -327,14 +327,20 @@
 
   .pill-nav__item.is-active,
   .pill-nav__item[aria-current="page"] {
-    background: var(--signal, #e0603e);
     color: #000000;
-    box-shadow: 0 2px 10px rgba(224, 96, 62, 0.35);
   }
 
   .pill-nav__item.is-active:hover {
-    background: var(--signal, #e0603e);
     color: #000000;
+  }
+
+  .pill-nav__active-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--signal, #e0603e);
+    border-radius: 9999px;
+    box-shadow: 0 2px 10px rgba(224, 96, 62, 0.35);
+    z-index: 0;
   }
 
   .site-nav__actions {
@@ -1704,7 +1710,7 @@
     font-size: clamp(7rem, 16.8vw, 20rem);
     font-weight: 900;
     letter-spacing: -0.105em;
-    line-height: 0.64;
+    line-height: 0.85;
   }
 
   .final__title-line {
@@ -1851,7 +1857,10 @@
     }
 
     .scene--final {
-      height: 130vh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .scene--faq {
@@ -2509,7 +2518,7 @@
     .scene--principles { height: 205vh; }
     .scene--move { height: 150vh; }
     .scene--climax { height: 135vh; }
-    .scene--final { height: 135vh; }
+    .scene--final { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
 
     /* Hero "BEYOND THE CV" — was clamp(8rem,24.5vw,28rem) + nowrap (clipped) */
     .hero__title {
@@ -5112,4 +5121,15 @@ html[data-theme="light"] .dmenu { background: rgba(18,22,20,0.92); color: #f4f2e
 .legal-contact-box a {
   color: var(--signal, #e0603e);
   text-decoration: underline;
+}
+
+/* Hide global side progress lines (left and right indicators) when in the FAQ section (scene 07) */
+.landing-shell[data-active-scene="07"] .story-progress,
+.landing-shell[data-active-scene="07"] .scene-indicator {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.story-progress, .scene-indicator {
+  transition: opacity 0.3s ease !important;
 }

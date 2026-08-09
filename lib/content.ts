@@ -1,9 +1,9 @@
 export const navigation = [
   { index: "00", label: "HOME", href: "#top" },
-  { index: "01", label: "PROJECTS", href: "#read" },
-  { index: "02", label: "BLOG", href: "#match" },
-  { index: "03", label: "COLLAB", href: "#tailor" },
-  { index: "04", label: "CONTACT", href: "#move" },
+  { index: "01", label: "APPROACH", href: "#approach" },
+  { index: "02", label: "PROJECTS", href: "#work" },
+  { index: "03", label: "TEAM", href: "#team" },
+  { index: "04", label: "CONTACT", href: "#contact" },
 ] as const;
 
 export const resumeSignals = [

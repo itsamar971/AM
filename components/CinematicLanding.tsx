@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import BoxLoader from "@/components/ui/box-loader";
 import { SpinningText } from "@/components/ui/spinning-text";
 import { Wave } from "@/components/ui/wave";
 import { Hero } from "@/components/Hero";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import ScrollFAQAccordion from "@/components/ui/scroll-faqaccordion";
+import { Timeline } from "@/components/ui/timeline";
+import { SelectedProjects } from "@/components/ui/projects";
+import { TeamExperience } from "@/components/ui/TeamExperience";
+import { RoiCalculator } from "@/components/ui/RoiCalculator";
 import {
   boundaryChecks,
   matchRoutes,
@@ -27,7 +32,9 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
   const loaderStatusRef = useRef<HTMLOutputElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
   const loaderCenterRef = useRef<HTMLDivElement>(null);
+  const lenisRef = useRef<any>(null);
   const [activeScene, setActiveScene] = useState("00");
+  const [activeNav, setActiveNav] = useState("00");
   const [loaderComplete, setLoaderComplete] = useState(false);
 
   useEffect(() => {
@@ -166,7 +173,35 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
       { rootMargin: "-46% 0px -46% 0px", threshold: 0 },
     );
 
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              Math.abs(a.boundingClientRect.top) -
+              Math.abs(b.boundingClientRect.top)
+          );
+
+        if (visible.length > 0) {
+          const id = visible[0].target.id;
+          if (id === "hero" || id === "top") setActiveNav("00");
+          else if (id === "read" || id === "approach") setActiveNav("01");
+          else if (id === "work") setActiveNav("02");
+          else if (id === "team") setActiveNav("03");
+          else if (id === "contact") setActiveNav("04");
+        }
+      },
+      { rootMargin: "-20% 0px -80% 0px", threshold: 0 }
+    );
+
     scenes.forEach((scene) => observer.observe(scene));
+    
+    const navIds = ["top", "hero", "read", "approach", "work", "team", "contact"];
+    navIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) navObserver.observe(el);
+    });
 
     let frame = 0;
     const updateProgress = () => {
@@ -193,6 +228,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
 
     return () => {
       observer.disconnect();
+      navObserver.disconnect();
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
       if (frame) cancelAnimationFrame(frame);
@@ -252,6 +288,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                 wheelMultiplier: 0.88,
                 touchMultiplier: 1,
               });
+              lenisRef.current = lenis;
               const updateScrollTrigger = () => ScrollTrigger.update();
               const tick = (time: number) => lenis.raf(time * 1000);
 
@@ -450,20 +487,29 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                 )
                 .to(".climax__rule", { scaleX: 1 }, 0.14);
 
-              const finalTimeline = makePinnedTimeline(".scene--final", 0.72);
-              finalTimeline
-                ?.from(
-                  ".final__eyebrow, .final__title-line, .final__copy, .final__action",
-                  { yPercent: 42, autoAlpha: 0, stagger: 0.08 },
-                  0,
-                )
-                .fromTo(
-                  ".final__crop",
-                  { yPercent: 58 },
-                  { yPercent: 14 },
-                  0,
-                );
-
+              // Restored GSAP animation for scene--final (unpinned)
+              const finalEl = main.querySelector(".scene--final");
+              if (finalEl) {
+                const finalTimeline = gsap.timeline({
+                  scrollTrigger: {
+                    trigger: finalEl,
+                    start: "top 75%",
+                  },
+                });
+                finalTimeline
+                  .fromTo(
+                    ".final__title-line",
+                    { y: 140, autoAlpha: 0 },
+                    { y: 0, autoAlpha: 1, stagger: 0.12, duration: 1.2, ease: "power3.out" },
+                    0
+                  )
+                  .fromTo(
+                    ".final__copy, .final__action, .final__eyebrow",
+                    { y: 40, autoAlpha: 0 },
+                    { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1 },
+                    0.3
+                  );
+              }
               const faqEl = main.querySelector(".scene--faq");
               if (faqEl) {
                 const faqTimeline = gsap.timeline({
@@ -488,11 +534,20 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
             });
             const refreshTimeout = setTimeout(() => {
               ScrollTrigger.refresh();
-            }, 300);
+            }, 500);
+
+            let ro: ResizeObserver | null = null;
+            if (typeof window !== "undefined" && window.ResizeObserver) {
+              ro = new ResizeObserver(() => {
+                ScrollTrigger.refresh();
+              });
+              ro.observe(main);
+            }
 
             return () => {
               cancelAnimationFrame(refreshFrame);
               clearTimeout(refreshTimeout);
+              if (ro) ro.disconnect();
               destroySmoothScroll();
             };
           },
@@ -553,16 +608,37 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
         </a>
 
         <nav className="pill-nav" aria-label="Main navigation">
-          {navigation.map((item) => (
-            <a
-              href={item.href}
-              key={item.href}
-              className={`pill-nav__item ${activeScene === item.index ? "is-active" : ""}`}
-              aria-current={activeScene === item.index ? "page" : undefined}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navigation.map((item) => {
+            const isActive = activeNav === item.index;
+            return (
+              <a
+                href={item.href}
+                key={item.href}
+                className={`pill-nav__item ${isActive ? "is-active" : ""}`}
+                aria-current={isActive ? "page" : undefined}
+                style={{ position: "relative" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveNav(item.index);
+                  if (lenisRef.current) {
+                    lenisRef.current.scrollTo(item.href);
+                  } else {
+                    const targetId = item.href.replace("#", "");
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="pill-nav-active-bg"
+                    className="pill-nav__active-bg"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span style={{ position: "relative", zIndex: 1 }}>{item.label}</span>
+              </a>
+            );
+          })}
         </nav>
 
         <div className="site-nav__actions">
@@ -925,6 +1001,8 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           </div>
         </section>
 
+        <Timeline />
+
         <section
           className="scene scene--climax"
           data-scene="05"
@@ -946,6 +1024,13 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
             </p>
           </div>
         </section>
+
+        <section style={{ padding: "4rem 2rem", background: "#0a0a0a" }}>
+          <RoiCalculator />
+        </section>
+
+        <SelectedProjects />
+        <TeamExperience />
 
         <section
           className="scene scene--final"
@@ -976,12 +1061,6 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
               BRIEF
             </div>
 
-            <footer className="site-footer">
-              <a href="#top">AM / 2026</a>
-              <span>GLOBAL BY DESIGN</span>
-              <span>SCOPE BOUND</span>
-              <span>CLIENT CONTROL</span>
-            </footer>
           </div>
         </section>
 
@@ -997,9 +1076,11 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           </div>
         </section>
 
-        <CinematicFooter />
+        <div id="contact">
+          <CinematicFooter />
+        </div>
 
-        <footer className="site-footer-full" id="contact" aria-label="Site Footer">
+        <footer className="site-footer-full" aria-label="Site Footer">
           <div className="footer-full__inner">
             <div className="footer-full__brand-col">
               <a className="footer-full__logo" href="#top" aria-label="AM Studio, back to top">

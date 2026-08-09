@@ -207,7 +207,7 @@ const STYLES = `
 // ─────────────────────────────────────────────────────────────────────────────
 // Cal.com booking modal
 // ─────────────────────────────────────────────────────────────────────────────
-function CalModal({ onClose }: { onClose: () => void }) {
+export function CalModal({ onClose }: { onClose: () => void }) {
   // Initialise Cal API with our namespace
   useEffect(() => {
     (async () => {
@@ -468,7 +468,14 @@ export function CinematicFooter() {
               </Magnetic>
 
               <Magnetic>
-                <a href="/app" className="mf-pill mf-pill-primary">
+                <a 
+                  href="#work" 
+                  className="mf-pill mf-pill-primary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
                   <IconSearch />
                   View Our Work
                 </a>

@@ -1,0 +1,239 @@
+.roi-calculator {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 0;
+  border: 1px solid #ffffff;
+  box-shadow: 6px 6px 0 0 #e0603e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (min-width: 900px) {
+  .roi-calculator {
+    flex-direction: row;
+  }
+}
+
+.roi-heading {
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.roi-heading-orange {
+  color: #ff4d00;
+}
+
+/* Left Column (Inputs) */
+.roi-left {
+  background-color: #0a0a0a;
+  padding: 3rem;
+  flex: 1;
+  color: #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
+.roi-input-group {
+  margin-bottom: 2.5rem;
+}
+
+.roi-input-group:last-child {
+  margin-bottom: 0;
+}
+
+.roi-input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.roi-input-header label {
+  display: block;
+  font-weight: 900;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.roi-hint {
+  color: #a0a0a0;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.roi-value {
+  text-align: right;
+}
+
+.roi-value-number {
+  display: block;
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: #ff4d00;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.roi-value-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #a0a0a0;
+  text-transform: lowercase;
+}
+
+/* Range Slider */
+.roi-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  background: #eeeeee;
+  border-radius: 6px;
+  outline: none;
+  background-image: linear-gradient(#ff4d00, #ff4d00);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.2s ease;
+}
+
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  background: #0a0a0a;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 0 #e0603e;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.roi-slider::-webkit-slider-thumb:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 #e0603e;
+}
+
+.roi-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  background: #0a0a0a;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 0 #e0603e;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.roi-slider::-moz-range-thumb:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 #e0603e;
+}
+
+/* Right Column (Outputs) */
+.roi-right {
+  background-color: #0f0f0f;
+  padding: 3rem;
+  flex: 1.2;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.roi-main-stat {
+  margin-bottom: 3rem;
+}
+
+.roi-stat-label {
+  color: #888888;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.roi-stat-value {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.03em;
+}
+
+.roi-stat-subtext {
+  color: #666666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.roi-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.roi-metric-box {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 0;
+  padding: 1.25rem 1rem;
+}
+
+.roi-metric-label {
+  color: #888888;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem 0;
+}
+
+.roi-metric-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 0 0.25rem 0;
+  color: #ffffff;
+}
+
+.roi-metric-subtext {
+  color: #666666;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+/* CTA Button */
+.roi-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #ff4d00;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 1.25rem 2rem;
+  border-radius: 0; /* Sharp corners */
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  margin-top: auto;
+  border: 1px solid #ff4d00;
+}
+
+.roi-cta-button:hover {
+  background-color: #e64500;
+  transform: translate(-4px, -4px);
+  box-shadow: 6px 6px 0 0 #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.roi-cta-arrow {
+  margin-left: 0.5rem;
+  font-family: monospace;
+  font-size: 1.2em;
+}
