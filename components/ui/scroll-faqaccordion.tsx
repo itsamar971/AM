@@ -127,6 +127,7 @@ export default function ScrollFAQAccordion({
               <Accordion.Item
                 value={item.id.toString()}
                 key={item.id}
+                className="faq-box-item" // Re-added for GSAP targeting
                 style={{
                   borderRadius: "0",
                   border: isOpen ? "2px solid #e0603e" : "1px solid rgba(255,255,255,0.2)",

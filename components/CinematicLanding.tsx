@@ -469,15 +469,15 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                 const faqTimeline = gsap.timeline({
                   scrollTrigger: {
                     trigger: faqEl,
-                    start: "top 60%", // Animate in as it scrolls up
-                    end: "top 10%",
-                    scrub: 1.2,
+                    start: "top 90%", // Start animating much earlier
+                    end: "center center", // Finish animating much later
+                    scrub: 2.5, // Heavy smoothing so it glides slowly
                   },
                 });
                 faqTimeline.fromTo(
                   ".faq-box-item",
-                  { x: -120, autoAlpha: 0 },
-                  { x: 0, autoAlpha: 1, stagger: 0.12 },
+                  { x: -160, autoAlpha: 0 },
+                  { x: 0, autoAlpha: 1, stagger: 0.25, duration: 1.5, ease: "power2.out" },
                   0,
                 );
               }
