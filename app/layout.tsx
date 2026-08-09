@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeBoot } from "@/components/ThemeBoot";
+import { CustomCursor } from "@/components/CustomCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <noscript>
           <style>{`.loader { display: none !important; }`}</style>
         </noscript>
+        <CustomCursor />
         {children}
       </body>
     </html>
