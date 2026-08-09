@@ -464,13 +464,23 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                   0,
                 );
 
-              const faqTimeline = makePinnedTimeline(".scene--faq", 0.72);
-              faqTimeline?.fromTo(
-                ".faq-box-item",
-                { x: -120, autoAlpha: 0 },
-                { x: 0, autoAlpha: 1, stagger: 0.12 },
-                0,
-              );
+              const faqEl = main.querySelector(".scene--faq");
+              if (faqEl) {
+                const faqTimeline = gsap.timeline({
+                  scrollTrigger: {
+                    trigger: faqEl,
+                    start: "top 60%", // Animate in as it scrolls up
+                    end: "top 10%",
+                    scrub: 1.2,
+                  },
+                });
+                faqTimeline.fromTo(
+                  ".faq-box-item",
+                  { x: -120, autoAlpha: 0 },
+                  { x: 0, autoAlpha: 1, stagger: 0.12 },
+                  0,
+                );
+              }
             }
 
             const refreshFrame = requestAnimationFrame(() => {
@@ -980,9 +990,9 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           id="faq"
           data-scene="07"
           aria-label="Frequently Asked Questions"
-          style={{ background: "#000000", color: "#f2efe6" }}
+          style={{ background: "#000000", color: "#f2efe6", height: "auto", minHeight: "100vh" }}
         >
-          <div className="scene__stage faq__stage flex items-center justify-center min-h-screen py-12 px-6 md:px-12">
+          <div className="scene__stage faq__stage flex items-center justify-center min-h-screen py-12 px-6 md:px-12" style={{ height: "auto", minHeight: "100vh" }}>
             <ScrollFAQAccordion />
           </div>
         </section>

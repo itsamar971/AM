@@ -57,115 +57,179 @@ export default function ScrollFAQAccordion({
 
   return (
     <div
-      className={cn(
-        "relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 rounded-none bg-[#000000] text-[#f2efe6]",
-        className
-      )}
+      style={{
+        position: "relative",
+        zIndex: 20,
+        width: "100%",
+        maxWidth: "1000px",
+        margin: "0 auto",
+        minHeight: "100vh", // Force container to take full height of the viewport
+        padding: "5rem 1rem 2rem 1rem", // Add top padding to always clear the nav bar
+        backgroundColor: "#000000",
+        color: "#f2efe6",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center", // This perfectly vertically centers the entire block!
+      }}
+      className={className}
     >
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-        {/* Left Column: Asymmetric Header Block */}
-        <div className="faq-box-item lg:w-5/12 border-l-4 border-[#e0603e] pl-6 py-2">
-          <span
-            className="text-[#e0603e] text-xs md:text-sm font-mono tracking-[0.25em] uppercase font-bold block mb-3"
-            style={{ fontFamily: '"SFMono-Regular", Consolas, monospace' }}
-          >
-            04 // KNOWLEDGE BASE
-          </span>
-          <h2
-            className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase mb-6 leading-none"
-            style={{ fontFamily: '"Arial Black", "Helvetica Neue", sans-serif' }}
-          >
-            FREQUENTLY ASKED QUESTIONS
-          </h2>
-          <p className="text-[#f2efe6]/70 text-base md:text-lg leading-relaxed font-mono">
-            Insights into our process, technical capabilities, and how we partner with ambitious teams to deliver exceptional digital products.
-          </p>
-        </div>
+      {/* Header Block */}
+      <div style={{ textAlign: "center", marginBottom: "3rem", width: "100%" }}>
+        <span
+          style={{
+            color: "#e0603e",
+            fontSize: "0.875rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            fontWeight: "bold",
+            display: "block",
+            marginBottom: "0.5rem",
+            fontFamily: '"SFMono-Regular", Consolas, monospace',
+          }}
+        >
+          04 // KNOWLEDGE BASE
+        </span>
+        <h2
+          style={{
+            fontSize: "clamp(2rem, 5vw, 4rem)", // Restored to a bold, premium size
+            fontWeight: 900,
+            textTransform: "uppercase",
+            color: "white",
+            lineHeight: 1.1,
+            margin: "0 0 1rem 0",
+            fontFamily: '"Arial Black", "Helvetica Neue", sans-serif',
+          }}
+        >
+          FREQUENTLY ASKED QUESTIONS
+        </h2>
+        <p style={{ color: "rgba(242, 239, 230, 0.7)", fontSize: "1rem", fontFamily: "monospace", maxWidth: "600px", margin: "0 auto", display: "none" }}>
+          {/* Hidden description to save vertical space */}
+        </p>
+      </div>
 
-        {/* Right Column: Brutalist Stacked Accordion Cards */}
-        <div className="lg:w-7/12 w-full">
-          <Accordion.Root
-            type="single"
-            collapsible
-            value={openItem || ""}
-            onValueChange={setOpenItem}
-            className="space-y-6"
-          >
-            {data.map((item) => {
-              const isOpen = openItem === item.id.toString();
-              return (
-                <Accordion.Item
-                  value={item.id.toString()}
-                  key={item.id}
-                  className={cn(
-                    "faq-box-item rounded-none transition-all duration-300 border-2",
-                    isOpen
-                      ? "bg-[#141816] border-[#e0603e] shadow-[6px_6px_0px_0px_#e0603e]"
-                      : "bg-[#0b0e0d] border-white/20 hover:border-white/60 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.08)]"
-                  )}
-                >
-                  <Accordion.Header className="w-full">
-                    <Accordion.Trigger className="flex w-full items-center justify-between p-6 md:p-8 cursor-pointer bg-transparent border-none appearance-none outline-none text-left rounded-none group">
-                      <div className="flex items-center space-x-6 text-left flex-1 pr-4">
-                        <span
-                          className={cn(
-                            "text-sm md:text-base font-mono font-bold tracking-widest shrink-0 px-3 py-1 border-2 rounded-none transition-colors",
-                            isOpen
-                              ? "bg-[#e0603e] text-[#000000] border-[#e0603e]"
-                              : "bg-[#000000] text-[#e0603e] border-[#e0603e]/40 group-hover:border-[#e0603e]"
-                          )}
-                          style={{ fontFamily: '"SFMono-Regular", Consolas, monospace' }}
-                        >
-                          {String(item.id).padStart(2, "0")}
-                        </span>
-                        <span
-                          className={cn(
-                            "font-bold text-lg md:text-2xl tracking-tight uppercase leading-snug transition-colors",
-                            isOpen ? "text-[#e0603e]" : "text-white group-hover:text-white"
-                          )}
-                          style={{ fontFamily: '"Arial Black", "Helvetica Neue", sans-serif' }}
-                        >
-                          {item.question}
-                        </span>
-                      </div>
-
-                      {/* Clean Right-Aligned Geometric Action Button */}
+      {/* Accordion Block */}
+      <div style={{ width: "100%" }}>
+        <Accordion.Root
+          type="single"
+          collapsible
+          value={openItem || ""}
+          onValueChange={(val) => {
+            setOpenItem(val);
+            // Optionally dispatch immediately to start adjusting before animation completes
+            setTimeout(() => window.dispatchEvent(new Event("resize")), 50);
+          }}
+          style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+        >
+          {data.map((item) => {
+            const isOpen = openItem === item.id.toString();
+            return (
+              <Accordion.Item
+                value={item.id.toString()}
+                key={item.id}
+                style={{
+                  borderRadius: "0",
+                  border: isOpen ? "2px solid #e0603e" : "1px solid rgba(255,255,255,0.2)",
+                  backgroundColor: isOpen ? "#141816" : "#0b0e0d",
+                  boxShadow: isOpen ? "5px 5px 0px 0px #e0603e" : "5px 5px 0px 0px rgba(255,255,255,0.06)",
+                  transition: "all 0.2s ease",
+                  overflow: "hidden"
+                }}
+              >
+                <Accordion.Header style={{ margin: 0, width: "100%" }}>
+                  <Accordion.Trigger
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "1.25rem 1.5rem",
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
+                      border: "none",
+                      textAlign: "left",
+                      color: "inherit",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "1rem", flex: 1 }}>
                       <span
-                        className={cn(
-                          "flex-shrink-0 flex items-center justify-center w-10 h-10 border-2 rounded-none transition-all duration-300 ml-4",
-                          isOpen
-                            ? "border-[#e0603e] bg-[#e0603e] text-[#000000] rotate-180"
-                            : "border-white/30 text-white bg-[#000000] group-hover:border-white group-hover:bg-white group-hover:text-[#000000]"
-                        )}
+                        style={{
+                          fontSize: "0.875rem",
+                          fontWeight: "bold",
+                          fontFamily: '"SFMono-Regular", Consolas, monospace',
+                          padding: "0.2rem 0.6rem",
+                          border: isOpen ? "2px solid #e0603e" : "2px solid rgba(224, 96, 62, 0.4)",
+                          backgroundColor: isOpen ? "#e0603e" : "#000000",
+                          color: isOpen ? "#000000" : "#e0603e",
+                          transition: "all 0.2s ease",
+                        }}
                       >
-                        {isOpen ? <Minus className="h-5 w-5 stroke-[3]" /> : <Plus className="h-5 w-5 stroke-[3]" />}
+                        {String(item.id).padStart(2, "0")}
                       </span>
-                    </Accordion.Trigger>
-                  </Accordion.Header>
+                      <span
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: '"Arial Black", "Helvetica Neue", sans-serif',
+                          color: isOpen ? "#e0603e" : "#ffffff",
+                          transition: "color 0.2s ease",
+                        }}
+                      >
+                        {item.question}
+                      </span>
+                    </div>
 
-                  <Accordion.Content asChild forceMount>
-                    <motion.div
-                      initial="collapsed"
-                      animate={isOpen ? "open" : "collapsed"}
-                      variants={{
-                        open: { opacity: 1, height: "auto" },
-                        collapsed: { opacity: 0, height: 0 },
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "2rem",
+                        height: "2rem",
+                        border: isOpen ? "2px solid #e0603e" : "2px solid rgba(255,255,255,0.3)",
+                        backgroundColor: isOpen ? "#e0603e" : "#000000",
+                        color: isOpen ? "#000000" : "#ffffff",
+                        transition: "all 0.2s ease",
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                        flexShrink: 0,
                       }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
                     >
-                      <div className="px-6 md:px-8 pb-8 pt-4 border-t-2 border-white/10 mt-2">
-                        <p className={cn("text-[#f2efe6]/80 text-base md:text-lg leading-relaxed font-sans", answerClassName)}>
-                          {item.answer}
-                        </p>
-                      </div>
-                    </motion.div>
-                  </Accordion.Content>
-                </Accordion.Item>
-              );
-            })}
-          </Accordion.Root>
-        </div>
+                      {isOpen ? <Minus style={{ strokeWidth: 3, width: "1rem", height: "1rem" }} /> : <Plus style={{ strokeWidth: 3, width: "1rem", height: "1rem" }} />}
+                    </span>
+                  </Accordion.Trigger>
+                </Accordion.Header>
+
+                <Accordion.Content asChild forceMount>
+                  <motion.div
+                    initial="collapsed"
+                    animate={isOpen ? "open" : "collapsed"}
+                    variants={{
+                      open: { opacity: 1, height: "auto" },
+                      collapsed: { opacity: 0, height: 0 },
+                    }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    onAnimationComplete={() => {
+                      window.dispatchEvent(new Event("resize"));
+                    }}
+                    onUpdate={() => {
+                      // Trigger a soft refresh to keep pin spacing perfectly accurate during the animation
+                      if (typeof window !== "undefined" && (window as any).ScrollTrigger) {
+                         (window as any).ScrollTrigger.refresh(true);
+                      }
+                    }}
+                  >
+                    <div style={{ padding: "0 2rem 2rem 2rem", marginTop: "1rem", borderTop: "2px solid rgba(255,255,255,0.1)", paddingTop: "1.5rem" }}>
+                      <p style={{ color: "rgba(242, 239, 230, 0.8)", fontSize: "1.125rem", lineHeight: 1.6, fontFamily: "sans-serif", margin: 0 }}>
+                        {item.answer}
+                      </p>
+                    </div>
+                  </motion.div>
+                </Accordion.Content>
+              </Accordion.Item>
+            );
+          })}
+        </Accordion.Root>
       </div>
     </div>
   );
