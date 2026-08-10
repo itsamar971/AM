@@ -36,7 +36,7 @@ export function CustomCursor() {
         width: isHovering ? "64px" : "24px",
         height: isHovering ? "64px" : "24px",
         backgroundColor: isHovering ? "rgba(223, 95, 62, 0.9)" : "#DF5F3E",
-        border: isHovering ? "none" : "2px solid #000000",
+        border: isHovering ? "none" : "2px solid #FFFFFF",
         backdropFilter: "blur(4px)",
         borderRadius: "50%",
         transition: "width 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s, border 0.2s",

@@ -12,6 +12,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { SelectedProjects } from "@/components/ui/projects";
 import { TeamExperience } from "@/components/ui/TeamExperience";
 import { RoiCalculator } from "@/components/ui/RoiCalculator";
+import TestimonialsSection from "@/components/ui/testimonials-3";
 import {
   boundaryChecks,
   matchRoutes,
@@ -1073,6 +1074,30 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
         >
           <div className="scene__stage faq__stage flex flex-col items-center justify-center min-h-screen py-12 px-6 md:px-12" style={{ height: "auto", minHeight: "100vh" }}>
             <ScrollFAQAccordion />
+          </div>
+        </section>
+
+        <section className="flex flex-col min-h-screen w-full items-center justify-center bg-black px-6 md:px-12 py-24 text-[#f2efe6] border-t border-[#333]">
+          <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center">
+            <div className="max-w-xl text-center">
+              <h2 className="mt-3 text-balance font-semibold text-3xl tracking-tight sm:text-4xl text-[#f2efe6]">
+                Loved by builders everywhere
+              </h2>
+              <p className="mt-4 text-zinc-400">
+                Don't take our word for it — here's what industry leaders have to
+                say.
+              </p>
+            </div>
+            
+            {/* Foolproof Spacer */}
+            <div style={{ height: '120px', width: '100%' }} aria-hidden="true" />
+            
+            <div className="w-full flex justify-center">
+              <TestimonialsSection />
+            </div>
+            
+            {/* Foolproof Bottom Spacer to account for translated cards */}
+            <div style={{ height: '120px', width: '100%' }} aria-hidden="true" />
           </div>
         </section>
 

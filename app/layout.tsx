@@ -49,6 +49,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   const tree = (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Playwrite+DE+LA&display=swap" rel="stylesheet" />
         <ThemeBoot />
       </head>
       <body>
