@@ -232,6 +232,42 @@ export default function ScrollFAQAccordion({
           })}
         </Accordion.Root>
       </div>
+
+      {/* Stack CTA Button */}
+      <div style={{ marginTop: "4rem", marginBottom: "1rem", width: "100%", display: "flex", justifyContent: "center" }}>
+        <a 
+          href="/stack" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#DF5F3E",
+            color: "#000",
+            fontWeight: "900",
+            padding: "1rem 2.5rem",
+            borderRadius: "0",
+            border: "2px solid #DF5F3E",
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            textDecoration: "none",
+            fontSize: "0.9rem",
+            transition: "all 0.15s ease-out",
+            boxShadow: "6px 6px 0px #ffffff"
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = "translate(4px, 4px)";
+            e.currentTarget.style.boxShadow = "2px 2px 0px #ffffff";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = "translate(0px, 0px)";
+            e.currentTarget.style.boxShadow = "6px 6px 0px #ffffff";
+          }}
+        >
+          Play with our stack <span style={{ marginLeft: "8px" }}>➔</span>
+        </a>
+      </div>
     </div>
   );
 }

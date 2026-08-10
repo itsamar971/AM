@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import "tailwindcss";
+
 @layer reset, base, layout, scenes, responsive, motion;
 
 @layer reset {

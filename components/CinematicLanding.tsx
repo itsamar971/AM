@@ -1071,7 +1071,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           aria-label="Frequently Asked Questions"
           style={{ background: "#000000", color: "#f2efe6", height: "auto", minHeight: "100vh" }}
         >
-          <div className="scene__stage faq__stage flex items-center justify-center min-h-screen py-12 px-6 md:px-12" style={{ height: "auto", minHeight: "100vh" }}>
+          <div className="scene__stage faq__stage flex flex-col items-center justify-center min-h-screen py-12 px-6 md:px-12" style={{ height: "auto", minHeight: "100vh" }}>
             <ScrollFAQAccordion />
           </div>
         </section>
