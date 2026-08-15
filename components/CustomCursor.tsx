@@ -27,6 +27,7 @@ export function CustomCursor() {
 
   return (
     <div
+      className="hidden md:block"
       style={{
         pointerEvents: "none",
         position: "fixed",

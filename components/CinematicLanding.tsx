@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import BoxLoader from "@/components/ui/box-loader";
 import { SpinningText } from "@/components/ui/spinning-text";
 import { Wave } from "@/components/ui/wave";
@@ -37,6 +38,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
   const [activeScene, setActiveScene] = useState("00");
   const [activeNav, setActiveNav] = useState("00");
   const [loaderComplete, setLoaderComplete] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia(
@@ -305,6 +307,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
             const makePinnedTimeline = (
               sceneSelector: string,
               scrub = 0.85,
+              pin = true
             ) => {
               const scene = main.querySelector<HTMLElement>(sceneSelector);
               const stage = scene?.querySelector<HTMLElement>(".scene__stage");
@@ -314,12 +317,12 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                 defaults: { ease: "none" },
                 scrollTrigger: {
                   trigger: scene,
-                  start: "top top",
-                  end: "bottom bottom",
+                  start: pin ? "top top" : "top 70%",
+                  end: pin ? "bottom bottom" : "bottom 30%",
                   scrub,
-                  pin: stage,
-                  pinSpacing: true,
-                  anticipatePin: 1,
+                  pin: pin ? stage : false,
+                  pinSpacing: pin,
+                  anticipatePin: pin ? 1 : 0,
                   invalidateOnRefresh: true,
                 },
               });
@@ -352,35 +355,55 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
 
 
 
-              const readTimeline = makePinnedTimeline(".scene--read", 0.8);
-              readTimeline
-                ?.fromTo(
-                  ".read__document",
-                  { clipPath: "inset(12% 38% 12% 38%)", scale: 1.36 },
-                  { clipPath: "inset(0% 0% 0% 0%)", scale: 1 },
-                  0,
-                )
-                .from(
-                  ".read__headline-line",
-                  { yPercent: 112, stagger: 0.08 },
-                  0.05,
-                )
-                .fromTo(
-                  ".read__scan",
-                  { xPercent: -110 },
-                  { xPercent: 110 },
-                  0,
-                )
-                .from(
-                  ".read__signal",
-                  { xPercent: -16, autoAlpha: 0, stagger: 0.1 },
-                  0.18,
-                )
-                .from(
-                  ".read__teacher",
-                  { yPercent: 55, autoAlpha: 0 },
-                  0.48,
-                );
+              const readTimeline = conditions.mobile ? null : makePinnedTimeline(".scene--read", 0.8);
+              if (conditions.mobile) {
+                gsap.from(".read__headline-line", {
+                  scrollTrigger: { trigger: ".read__content", start: "top 85%" },
+                  yPercent: 112, stagger: 0.08, duration: 0.8, ease: "power3.out"
+                });
+
+                const docTl = gsap.timeline({
+                  scrollTrigger: { trigger: ".read__document", start: "top 80%" }
+                });
+                docTl
+                  .fromTo(".read__document", { xPercent: 100, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" })
+                  .fromTo(".read__scan", { xPercent: -110 }, { xPercent: 110, duration: 0.8, ease: "none" }, "-=0.2")
+                  .from(".read__signal", { xPercent: -16, autoAlpha: 0, stagger: 0.1, duration: 0.5 }, "-=0.4");
+
+                gsap.from(".read__teacher", {
+                  scrollTrigger: { trigger: ".read__teacher", start: "top 85%" },
+                  yPercent: 55, autoAlpha: 0, duration: 0.8, ease: "power3.out"
+                });
+              } else {
+                readTimeline
+                  ?.fromTo(
+                    ".read__document",
+                    { clipPath: "inset(12% 38% 12% 38%)", scale: 1.36 },
+                    { clipPath: "inset(0% 0% 0% 0%)", scale: 1 },
+                    0,
+                  )
+                  .from(
+                    ".read__headline-line",
+                    { yPercent: 112, stagger: 0.08 },
+                    0.05,
+                  )
+                  .fromTo(
+                    ".read__scan",
+                    { xPercent: -110 },
+                    { xPercent: 110 },
+                    0,
+                  )
+                  .from(
+                    ".read__signal",
+                    { xPercent: -16, autoAlpha: 0, stagger: 0.1 },
+                    0.18,
+                  )
+                  .from(
+                    ".read__teacher",
+                    { yPercent: 55, autoAlpha: 0 },
+                    0.48,
+                  );
+              }
 
               const matchTimeline = makePinnedTimeline(".scene--match", 0.92);
               const matchTrack =
@@ -411,7 +434,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                   );
               }
 
-              const principlesTimeline = makePinnedTimeline(
+              const principlesTimeline = conditions.mobile ? null : makePinnedTimeline(
                 ".scene--principles",
                 0.88,
               );
@@ -476,7 +499,11 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
               climaxTimeline
                 ?.fromTo(
                   ".climax__statement",
-                  { scale: 3.6, xPercent: 22, transformOrigin: "50% 50%" },
+                  { 
+                    scale: conditions.mobile ? 1.5 : 3.6, 
+                    xPercent: conditions.mobile ? 0 : 22, 
+                    transformOrigin: "50% 50%" 
+                  },
                   { scale: 1, xPercent: 0 },
                   0,
                 )
@@ -602,13 +629,13 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
         </div>
       </div>
 
-      <header className="site-nav">
-        <a className="wordmark" href="#top" aria-label="AM Studio, back to top">
+      <header className="site-nav fixed top-5 left-0 w-full flex justify-between items-center px-6 z-[500] pointer-events-none">
+        <a className="wordmark flex pointer-events-auto text-white text-xl font-black z-50" href="#top" aria-label="AM Studio, back to top" style={{ display: 'flex !important', opacity: 1 }}>
           <span>AM</span>
           <span className="wordmark__cv"></span>
         </a>
 
-        <nav className="pill-nav" aria-label="Main navigation">
+        <nav className="pill-nav hidden md:flex" aria-label="Main navigation">
           {navigation.map((item) => {
             const isActive = activeNav === item.index;
             return (
@@ -642,7 +669,59 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
           })}
         </nav>
 
-        <div className="site-nav__actions">
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden text-white z-50 p-2 pointer-events-auto"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        {/* Mobile Dropdown Nav */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[399] md:hidden pointer-events-auto"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              <motion.nav
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed top-0 right-0 h-[100svh] w-[75vw] max-w-sm bg-[#0a0a0a] shadow-2xl border-l border-[#f2efe6]/10 flex flex-col items-start pt-28 px-8 gap-6 md:hidden z-[400] pointer-events-auto"
+              >
+                {navigation.map((item) => (
+                  <a
+                    href={item.href}
+                    key={item.href}
+                    className="text-white text-xl font-bold tracking-widest uppercase py-4 border-b border-white/10 w-full text-left"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileMenuOpen(false);
+                      setActiveNav(item.index);
+                      if (lenisRef.current) {
+                        lenisRef.current.scrollTo(item.href);
+                      } else {
+                        const targetId = item.href.replace("#", "");
+                        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </motion.nav>
+            </>
+          )}
+        </AnimatePresence>
+
+        <div className="site-nav__actions hidden md:block">
           <button
             className="theme-toggle"
             type="button"

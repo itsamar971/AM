@@ -26,7 +26,7 @@
 /* Typography Scale for Maximalism */
 .max-display {
   font-family: 'Black Ops One', system-ui;
-  font-size: clamp(4rem, 10vw, 10rem);
+  font-size: clamp(2.5rem, 8vw, 10rem);
   line-height: 0.85;
   text-transform: uppercase;
   margin: 0;
@@ -37,7 +37,7 @@
 
 .max-display-solid {
   font-family: 'Black Ops One', system-ui;
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: clamp(2rem, 6vw, 6rem);
   line-height: 0.9;
   text-transform: uppercase;
   margin: 0;
@@ -55,7 +55,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem clamp(1rem, 4vw, 2rem);
   background-color: #000;
   z-index: 100;
   position: relative;
@@ -98,7 +98,7 @@
 }
 
 .max-hero-left {
-  padding: 4rem;
+  padding: clamp(1.5rem, 5vw, 4rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -116,7 +116,7 @@
 
 .max-tagline-panel {
   background-color: rgba(255, 255, 255, 0.03);
-  padding: 2rem;
+  padding: clamp(1.5rem, 5vw, 2rem);
   margin-top: 2rem;
   max-width: 600px;
 }
@@ -163,7 +163,7 @@
 }
 
 .max-panel {
-  padding: 6rem 4rem;
+  padding: clamp(3rem, 10vw, 6rem) clamp(1.5rem, 5vw, 4rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -207,7 +207,7 @@
 }
 
 .max-feature-card {
-  padding: 3rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
   background-color: transparent;
   display: flex;
   flex-direction: column;
