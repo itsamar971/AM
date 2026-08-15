@@ -35,7 +35,7 @@ export default function CookiesPage() {
           <p><strong>Support & Questions</strong></p>
           <p>Location: Kompally, Hyderabad, Telangana, India</p>
           <p>Phone: +91 9542710588</p>
-          <p>Email: <a href="mailto:infoam@gmail.com">infoam@gmail.com</a></p>
+          <p>Email: <a href="mailto:supportamstudio@gmail.com">supportamstudio@gmail.com</a></p>
         </div>
       </section>
     </LegalLayout>

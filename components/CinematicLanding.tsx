@@ -1208,7 +1208,7 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                 <p>Telangana, India</p>
               </address>
               <div className="footer-full__contacts">
-                <p><strong>Email:</strong> <a href="mailto:infoam@gmail.com">infoam@gmail.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:supportamstudio@gmail.com">supportamstudio@gmail.com</a></p>
                 <p><strong>Phone:</strong> <a href="tel:+919542710588">+91 9542710588</a></p>
               </div>
             </div>
@@ -1232,7 +1232,6 @@ export function CinematicLanding({ getStartedHref }: CinematicLandingProps) {
                 <li><a href="/terms">Terms of Service</a></li>
                 <li><a href="/cookies">Cookie Settings</a></li>
                 <li><a href="/security">Security & NDAs</a></li>
-                <li><a href="/app">Client Portal</a></li>
               </ul>
             </div>
           </div>

@@ -64,7 +64,7 @@ export function LegalLayout({
               <p>Telangana, India</p>
             </address>
             <div className="footer-full__contacts">
-              <p><strong>Email:</strong> <a href="mailto:infoam@gmail.com">infoam@gmail.com</a></p>
+              <p><strong>Email:</strong> <a href="mailto:supportamstudio@gmail.com">supportamstudio@gmail.com</a></p>
               <p><strong>Phone:</strong> <a href="tel:+919542710588">+91 9542710588</a></p>
             </div>
           </div>
@@ -88,7 +88,6 @@ export function LegalLayout({
               <li><Link href="/terms">Terms of Service</Link></li>
               <li><Link href="/cookies">Cookie Settings</Link></li>
               <li><Link href="/security">Security & NDAs</Link></li>
-              <li><Link href="/app">Client Portal</Link></li>
             </ul>
           </div>
         </div>

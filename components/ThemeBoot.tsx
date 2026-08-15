@@ -12,11 +12,8 @@ export function ThemeBoot() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem("careeros-theme");
-      const preferred = window.matchMedia("(prefers-color-scheme: light)").matches
-        ? "light"
-        : "dark";
       document.documentElement.dataset.theme =
-        stored === "light" || stored === "dark" ? stored : preferred;
+        stored === "light" ? "light" : "dark";
     } catch {
       document.documentElement.dataset.theme = "dark";
     }
